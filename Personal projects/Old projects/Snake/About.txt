@@ -1,0 +1,1 @@
+My first snake game (everyone has one of those, right?). Ended up adding a pseudo-bot to not feel so lonely.
