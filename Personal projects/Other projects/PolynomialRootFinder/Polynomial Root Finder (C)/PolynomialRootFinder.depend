@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1659994260 source:c:\users\murilo luis\desktop\murilo\polynomialrootfinder\main.c
+	<stdio.h>
+	<stdlib.h>
+	<math.h>
+
