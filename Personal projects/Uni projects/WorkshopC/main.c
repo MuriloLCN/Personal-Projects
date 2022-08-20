@@ -1,32 +1,42 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-/*
-void pegar(char mensagem[200], int *ptr, char modo[2]) {
-    printf("%s", mensagem);
-
-    if (modo == "%s") {
-        scanf(modo, *ptr);
-    }
-    else {
-        scanf(modo, &*ptr);
-    }
-
-    printf("\n");
-}
-*/
+typedef struct {
+    int numero_items;
+    float preco;
+    char * nome;
+} Item;
 
 void main()
 {
-    float precoPacoteDeArroz = 12.5;
-    float precoPacoteDeFeijao = 8;
-    float precoCaixaDeOvos = 6.5;
-    float precoRefrigerante = 5.5;
-    float precoSalgadinho = 3.5;
+    Item arroz;
+    arroz.nome = "Pacote de arroz";
+    arroz.preco = 12.5;
+
+    Item feijao;
+    feijao.nome = "Pacote de feijao";
+    feijao.preco = 8;
+
+    Item ovos;
+    ovos.nome = "Caixa de ovos";
+    ovos.preco = 6.5;
+
+    Item refrigerante;
+    refrigerante.nome = "Refrigerante";
+    refrigerante.preco = 5.5;
+
+    Item salgadinho;
+    salgadinho.nome = "Salgadinho";
+    salgadinho.preco = 3.5;
+
+    int numeroItems = 5;
+    Item estoque[] = {arroz, feijao, ovos, refrigerante, salgadinho};
+
+    for (int l = 0; l < numeroItems; l++) {
+        estoque[l].numero_items = 0;
+    }
 
     float valorCompra, troco, valorRecebido;
-
-    int qtdArroz = 0, qtdFeijao = 0, qtdOvos = 0, qtdRefrigerante = 0, qtdSalgadinho = 0;
 
     int temp;
 
@@ -36,18 +46,14 @@ void main()
         system("cls");
         printf("-------------------------\nSupermercado C\n-------------------------\n\n");
         printf("Qual item voce deseja comprar?\n");
-        printf("[1] Arroz       (preco: %.2f) | No carrinho: %d\n", precoPacoteDeArroz, qtdArroz);
-        printf("[2] Feijao       (preco: %.2f) | No carrinho: %d\n", precoPacoteDeFeijao, qtdFeijao);
-        printf("[3] Ovos         (preco: %.2f) | No carrinho: %d\n", precoCaixaDeOvos, qtdOvos);
-        printf("[4] Refrigerante (preco: %.2f) | No carrinho: %d\n", precoRefrigerante, qtdRefrigerante);
-        printf("[5] Salgadinho   (preco: %.2f) | No carrinho: %d\n", precoSalgadinho, qtdSalgadinho);
+        for (int k = 0; k < numeroItems; k++) {
+            printf("[%d] %s (preco: %.2f) | No carrinho: %d\n", k + 1, estoque[k].nome, estoque[k].preco, estoque[k].numero_items);
+        }
         printf("Sub total: %.2f\n", subTotal);
-        printf("Insira [0] para finalizar suas compras, ou o negativo do numero do item para retirar um\n");
+        printf("Insira [0] para finalizar suas compras\n");
 
         scanf("%d", &temp);
         fflush(stdin);
-
-        int mult = 1;
 
         if (temp == 0) {
             printf("\nSeu subtotal: %.2f", subTotal);
@@ -68,76 +74,25 @@ void main()
                 break;
             }
         }
-        if (temp < 0) {
-            temp *= -1;
-            mult *= -1;
+
+        printf("Quantos itens deseja comprar? (negativos retiram itens)\n");
+        int num;
+        scanf("%d", &num);
+
+        if (temp > numeroItems) {
+            printf("Numero invalido\n");
+            continue;
         }
 
-        switch (temp) {
-            case 1:
-                if (qtdArroz <= 0 && mult == -1) {
-                    break;
-                }
-                subTotal += precoPacoteDeArroz * mult;
-                qtdArroz += 1 * mult;
-                break;
-            case 2:
-                if (qtdFeijao <= 0 && mult == -1) {
-                    break;
-                }
-                subTotal += precoPacoteDeFeijao * mult;
-                qtdFeijao += 1 * mult;
-                break;
-            case 3:
-                if (qtdOvos <= 0 && mult == -1) {
-                    break;
-                }
-                subTotal += precoCaixaDeOvos * mult;
-                qtdOvos += 1 * mult;
-                break;
-            case 4:
-                if (qtdRefrigerante <= 0 && mult == -1) {
-                    break;
-                }
-                subTotal += precoRefrigerante * mult;
-                qtdRefrigerante += 1 * mult;
-                break;
-            case 5:
-                if (qtdSalgadinho <= 0 && mult == -1) {
-                    break;
-                }
-                subTotal += precoSalgadinho * mult;
-                qtdSalgadinho += 1 * mult;
-                break;
+        if ((estoque[temp - 1].numero_items < -num)) {
+
+            num = -1 * estoque[temp - 1].numero_items;
         }
+
+        subTotal += estoque[temp - 1].preco * num;
+        estoque[temp - 1].numero_items += num;
     }
 
-    printf("\nTotal da compra: %.2f", subTotal);
+    printf("\nTotal da compra: R$%.2f", subTotal);
 
-
-    /*
-    printf("Insira o numero de itens comprados\n-------------------------\n");
-
-    printf("Preco arroz: %.2f\n", precoPacoteDeArroz);
-    pegar("Pacotes arroz: ", &qtdArroz, "%d");
-
-    printf("Preco feijao: %.2f\n", precoPacoteDeFeijao);
-    pegar("Pacotes feijao: ", &qtdFeijao, "%d");
-
-    printf("Preco caixa ovos: %.2f\n", precoCaixaDeOvos);
-    pegar("Duzias de ovos: ", &qtdOvos, "%d");
-
-    printf("Preco refrigerantes: %.2f\n", precoRefrigerante);
-    pegar("Refrigerantes: ", &qtdRefrigerante, "%d");
-
-    printf("Preco salgadinhos: %.2f\n", precoSalgadinho);
-    pegar("Salgadinhos: ", &qtdSalgadinho, "%d");
-
-    valorCompra = 0;
-    valorCompra += precoPacoteDeArroz * qtdArroz;
-    valorCompra += precoPacoteDeFeijao * qtdFeijao;
-    valorCompra += precoCaixaDeOvos * qtdOvos;
-    valorCompra += precoRefrigerante * qtdRefrigerante;
-    valorCompra += precoSalgadinho * qtdSalgadinho;
-    */
 }
