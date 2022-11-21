@@ -1,2 +1,0 @@
-This project was my first time messing around with the idea of a pathfinding algorithm. It's not super clean or
-optimized but it was a fun topic to explore, and I do want to try out new algorithms in the future.
