@@ -1,1 +1,0 @@
-My first time trying to make a pong game. Not much else to say.
