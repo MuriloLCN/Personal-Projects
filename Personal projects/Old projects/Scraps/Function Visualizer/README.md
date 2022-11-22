@@ -1,0 +1,1 @@
+This old project was my first time trying to make something of a 'cartesian function visualizer', it worked more or less well but not having everything translated correcly ended up making this somewhat of a mess. I want to try this again in the future, it was fun to do.
