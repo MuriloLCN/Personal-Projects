@@ -1,0 +1,1 @@
+This was my very first project with coding other than the obligatory 'Hello world!' program. I made it because the only homework lists that our physics teacher gave us in the last 6 months of middle school were just that, and I got tired of doing the calculations by hand.
