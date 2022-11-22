@@ -1,0 +1,1 @@
+This project was a simple implementation of the rational root theorem for polynomial equations that I tried to do to get more used with C (because uni uses it), ended up making the same program both in C and in C#, and the difference is huge. The C# one was much easier to make compared to the C version.
